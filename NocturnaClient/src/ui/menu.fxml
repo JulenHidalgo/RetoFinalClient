@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1024.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+        <menus>
+          <Menu mnemonicParsing="false" text="VER">
+            <items>
+              <MenuItem mnemonicParsing="false" text="MIS ENTRADAS" />
+                  <MenuItem mnemonicParsing="false" text="EVENTOS" />
+                  <MenuItem mnemonicParsing="false" text="SALAS" />
+                  <MenuItem mnemonicParsing="false" text="ARTISTAS" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="PERFIL">
+            <items>
+              <MenuItem mnemonicParsing="false" text="MI PERFIL" />
+                  <MenuItem mnemonicParsing="false" text="CERRAR SESIÓN" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="AYUDA">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <ImageView fitHeight="25.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true">
+         <HBox.margin>
+            <Insets left="765.0" />
+         </HBox.margin>
+         <image>
+            <Image url="@img/logoSinFondo(recortado).png" />
+         </image>
+      </ImageView>
+   </children>
+</HBox>
