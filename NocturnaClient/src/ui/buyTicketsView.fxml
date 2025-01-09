@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-image: url('file:/C:/Users/2dam/Downloads/fondo.jpg'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication8.ShowClubViewController">
+   <children>
+      <Label layoutX="258.0" layoutY="197.0" prefHeight="30.0" prefWidth="210.0" text="Nombre del evento:" textFill="#fafafa" AnchorPane.leftAnchor="330.0" AnchorPane.topAnchor="175.0">
+         <font>
+            <Font name="Calisto MT" size="24.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="550.0" layoutY="27.0" prefHeight="75.0" prefWidth="1056.0" AnchorPane.leftAnchor="112.0" AnchorPane.rightAnchor="112.0" AnchorPane.topAnchor="60.0">
+         <children>
+            <Label text="Comprar entradas" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <ListView fx:id="listViewListaDni" layoutX="540.0" layoutY="300.0" prefHeight="218.0" prefWidth="200.0" AnchorPane.topAnchor="230.0" />
+      <Label layoutX="268.0" layoutY="207.0" prefHeight="30.0" prefWidth="210.0" text="DNI asistentes:" textFill="#fafafa" AnchorPane.leftAnchor="330.0" AnchorPane.topAnchor="230.0">
+         <font>
+            <Font name="Calisto MT" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="709.0" layoutY="503.0" prefHeight="30.0" prefWidth="70.0" text="Total:" textFill="#fafafa" AnchorPane.rightAnchor="425.0" AnchorPane.topAnchor="490.0">
+         <font>
+            <Font name="Calisto MT" size="24.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="128.0" layoutY="557.0" prefHeight="66.0" prefWidth="1056.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="96.0">
+         <children>
+            <Button fx:id="btnComprar" mnemonicParsing="false" prefHeight="40.0" prefWidth="149.0" text="COMPRAR ENTRADA(S)" />
+         </children>
+      </HBox>
+      <RadioButton fx:id="rdBtnBizum" layoutX="370.0" layoutY="512.0" mnemonicParsing="false" text="Bizum" textFill="#fafafa" AnchorPane.leftAnchor="330.0" AnchorPane.topAnchor="470.0">
+         <font>
+            <Font name="Calisto MT" size="24.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="rdBtnTarjeta" layoutX="370.0" layoutY="562.0" mnemonicParsing="false" text="Tarjeta bancaria" textFill="#fafafa" AnchorPane.leftAnchor="330.0" AnchorPane.topAnchor="510.0">
+         <font>
+            <Font name="Calisto MT" size="24.0" />
+         </font>
+      </RadioButton>
+      <Label fx:id="lblName" layoutX="268.0" layoutY="207.0" prefHeight="30.0" prefWidth="210.0" text="Nombre" textFill="#fafafa" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="175.0">
+         <font>
+            <Font name="Calisto MT" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTotal" layoutX="719.0" layoutY="513.0" prefHeight="30.0" prefWidth="70.0" text="22" textFill="#fafafa" AnchorPane.rightAnchor="325.0" AnchorPane.topAnchor="490.0">
+         <font>
+            <Font name="Calisto MT" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
