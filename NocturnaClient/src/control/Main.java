@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import ui_controllers.SignUpViewController;
 
 
 public class Main extends javafx.application.Application {
@@ -17,13 +18,15 @@ public class Main extends javafx.application.Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/ui/signUpView.fxml"));
-
-        Scene scene = new Scene(root);
-
-        stage.setScene(scene);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/signUpView.fxml"));
         
-        stage.show();
+        Parent root = loader.load();
+                
+        SignUpViewController controller = (SignUpViewController) loader.getController();
+
+        controller.setStage(stage);
+        
+        controller.initStage(root);
     }
 
     public static void main(String[] args) {

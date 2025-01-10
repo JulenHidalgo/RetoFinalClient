@@ -6,7 +6,7 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 /**
  *
  * @author 2dam
@@ -21,7 +21,7 @@ public class Client extends User implements Serializable {
 
     private Integer telefono;
 
-    private Date fehcaNacimiento; 
+    private Date fechaNacimiento; 
 
     private String dni;
             
@@ -30,13 +30,13 @@ public class Client extends User implements Serializable {
         super.setIsAdmin(false);
     }
 
-    public Client(String nombre, String apellido, String ciudad, Integer telefono, Date fehcaNacimiento, String dni, String mail, String passwd) {
+    public Client(String nombre, String apellido, String ciudad, Integer telefono, Date fechaNacimiento, String dni, String mail, String passwd) {
         super(mail, passwd, false);
         this.nombre = nombre;
         this.apellido = apellido;
         this.ciudad = ciudad;
         this.telefono = telefono;
-        this.fehcaNacimiento = fehcaNacimiento;
+        this.fechaNacimiento = fechaNacimiento;
         this.dni = dni;
     }
     
@@ -72,12 +72,12 @@ public class Client extends User implements Serializable {
         this.telefono = telefono;
     }
 
-    public Date getFehcaNacimiento() {
-        return fehcaNacimiento;
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setFehcaNacimiento(Date fehcaNacimiento) {
-        this.fehcaNacimiento = fehcaNacimiento;
+    public void setFechaNacimiento(Date fehcaNacimiento) {
+        this.fechaNacimiento = fehcaNacimiento;
     }
 
     public String getDni() {

@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-image: url('file:/C:/Users/2dam.TARTANGALH/Desktop/retoFinal/img/fondo.jpg'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox layoutX="47.0" layoutY="31.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <HBox fx:id="hbMenu" layoutX="47.0" layoutY="31.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Text fill="WHITE" layoutX="508.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ARTISTAS" textAlignment="CENTER" AnchorPane.leftAnchor="508.0" AnchorPane.topAnchor="87.9375">
          <font>
             <Font size="64.0" />
