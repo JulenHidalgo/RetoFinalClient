@@ -11,9 +11,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author 2dam
  */
-public interface UserManager {
-
-    public <T> T resetPassword_XML(Class<T> responseType, String userEmail) throws WebApplicationException;
+public interface ClientManager {
 
     public String countREST() throws WebApplicationException;
 
@@ -24,10 +22,6 @@ public interface UserManager {
     public <T> T findRange_XML(Class<T> responseType, String from, String to) throws WebApplicationException;
 
     public void create_XML(Object requestEntity) throws WebApplicationException;
-
-    public <T> T login_XML(Class<T> responseType, String mail, String passwd) throws WebApplicationException;
-
-    public void updatePasswd_XML(Object requestEntity, String newPasswd) throws WebApplicationException;
 
     public <T> T findAll_XML(Class<T> responseType) throws WebApplicationException;
 
