@@ -11,9 +11,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author 2dam
  */
-public interface UserManager {
-
-    public <T> T resetPassword_XML(Class<T> responseType, String userEmail) throws WebApplicationException;
+public interface ArtistManager {
 
     public String countREST() throws WebApplicationException;
 
@@ -25,13 +23,13 @@ public interface UserManager {
 
     public void create_XML(Object requestEntity) throws WebApplicationException;
 
-    public <T> T login_XML(Class<T> responseType, String mail, String passwd) throws WebApplicationException;
-
-    public void updatePasswd_XML(Object requestEntity, String newPasswd) throws WebApplicationException;
-
     public <T> T findAll_XML(Class<T> responseType) throws WebApplicationException;
 
+    public <T> T findNotByEvent_XML(Class<T> responseType, String idEvent) throws WebApplicationException;
+
     public void remove(String id) throws WebApplicationException;
+
+    public <T> T findByEvent_XML(Class<T> responseType, String idEvent) throws WebApplicationException;
 
     public void close();
 
