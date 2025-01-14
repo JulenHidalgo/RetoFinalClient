@@ -8,6 +8,7 @@ package rest;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
+import logic.ClubManager;
 import model.Club;
 
 /**
@@ -23,7 +24,7 @@ import model.Club;
  *
  * @author 2dam
  */
-public class ClubRESTClient {
+public class ClubRESTClient implements ClubManager{
 
     private WebTarget webTarget;
     private Client client;

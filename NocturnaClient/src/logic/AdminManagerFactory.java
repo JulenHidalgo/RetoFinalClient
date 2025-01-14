@@ -5,21 +5,21 @@
  */
 package logic;
 
-import rest.UserRESTClient;
+import rest.AdminRESTClient;
 
 /**
  *
  * @author 2dam
  */
-public class UserManagerFactory {
+public class AdminManagerFactory {
     
-    private static UserManager userManager;
+    private static AdminManager adminManager;
     
-    public static UserManager get(){
-        if(userManager == null){
-            userManager = new UserRESTClient();
+    public static AdminManager get(){
+        if(adminManager == null){
+            adminManager = new AdminRESTClient();
         }
-        return userManager;
+        return adminManager;
     }
     
 }

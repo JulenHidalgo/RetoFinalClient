@@ -5,21 +5,21 @@
  */
 package logic;
 
-import rest.UserRESTClient;
+import rest.ClubRESTClient;
 
 /**
  *
  * @author 2dam
  */
-public class UserManagerFactory {
+public class ClubManagerFactory {
     
-    private static UserManager userManager;
+    private static ClubManager clubManager;
     
-    public static UserManager get(){
-        if(userManager == null){
-            userManager = new UserRESTClient();
+    public static ClubManager get(){
+        if(clubManager == null){
+            clubManager = new ClubRESTClient();
         }
-        return userManager;
+        return clubManager;
     }
     
 }
