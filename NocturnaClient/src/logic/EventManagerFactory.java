@@ -19,6 +19,6 @@ public class EventManagerFactory {
         if(eventManager == null){
             eventManager = new EventRESTClient();
         }
-        return new EventRESTClient();
+        return eventManager;
     }
 }
