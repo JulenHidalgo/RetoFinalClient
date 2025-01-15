@@ -148,7 +148,7 @@ public class Event implements Serializable {
 
     @Override
     public String toString() {
-        return "enties.EventEntity[ id=" + idEvent + " ]";
+        return "enties.EventEntity[ id=" + idEvent+NumEntradas + " ]";
     }
     
 }
