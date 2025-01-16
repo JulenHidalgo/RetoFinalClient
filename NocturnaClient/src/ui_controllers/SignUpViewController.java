@@ -263,7 +263,7 @@ public class SignUpViewController {
                 SignInViewController controller = (SignInViewController) loader.getController();
 
                 controller.setStage(stage);
-
+                controller.setTema(tema);
                 controller.initStage(root);
 
             } catch (IOException e) {
@@ -359,7 +359,7 @@ public class SignUpViewController {
             ShowAllEventsViewController controller = (ShowAllEventsViewController) loader.getController();
 
             controller.setStage(stage);
-
+            controller.setTema(tema);
             controller.initStage(root);
 
         } catch (IOException e) {
