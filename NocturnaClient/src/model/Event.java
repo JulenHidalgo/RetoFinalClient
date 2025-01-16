@@ -10,6 +10,7 @@ import static java.sql.Date.valueOf;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
+import javafx.beans.property.SimpleStringProperty;
 import javax.validation.constraints.Future;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -106,8 +107,8 @@ public class Event implements Serializable {
     public void setClub(Club club) {
         this.club = club;
     }
+   
     
-
     public Set<Artist> getArtits(){
        return  this.artists;     
     }
