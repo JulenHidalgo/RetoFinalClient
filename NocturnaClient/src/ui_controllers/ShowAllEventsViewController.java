@@ -5,9 +5,13 @@
  */
 package ui_controllers;
 
+
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
@@ -31,6 +35,7 @@ import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.GenericType;
+import logic.ClubManagerFactory;
 
 import logic.EventManager;
 import logic.EventManagerFactory;
@@ -113,15 +118,12 @@ public class ShowAllEventsViewController {
     private void deleteEvent(ActionEvent event) {
         Event selectedEvent = tablaEvent.getSelectionModel().getSelectedItem();
         EventManagerFactory.get().remove(selectedEvent.getId().toString());
-        Event[] eventsArray = EventManagerFactory.get().findAll_XML(Event[].class); 
-        List<Event> events = Arrays.asList(eventsArray);
- 
-        cargarTabla(events);
+        cargarTabla(recogerAllEvents());
     }
     
     
     private void cargarTabla(List<Event> tableEvents){
-        System.out.println(tableEvents.get(0).toString());
+        System.out.println(tableEvents.get(0).getPrecioEntrada().toString());
         initializeTableColumns();        
         // Convertir ArrayList a ObservableList
         ObservableList<Event> observableEvents = FXCollections.observableArrayList(tableEvents);       
@@ -152,18 +154,19 @@ public class ShowAllEventsViewController {
         this.tema = tema;
     }
     
-  
+    private List recogerAllEvents(){
+    
+      Event[] eventsArray = EventManagerFactory.get().findByDate_XML(Event[].class, LocalDate.now().toString());
+      List<Event> events = Arrays.asList(eventsArray);
+      return  events;
+    }
     
     public void initStage(Parent root) {
 
         LOGGER.info("Initializing Bank Statement window.");
         Scene scene = new Scene(root);
 
-      
-      Event[] eventsArray = EventManagerFactory.get().findAll_XML(Event[].class);
-      List<Event> events = Arrays.asList(eventsArray);
- 
-      cargarTabla(events);
+        cargarTabla(recogerAllEvents());
         
         if(user instanceof Client){
             btnAñadirArtistas.setVisible(false);
@@ -199,16 +202,15 @@ public class ShowAllEventsViewController {
                     }
                 }
             }
-
-            
         });
        
         tcPrecio.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         tcPrecio.setOnEditCommit(event -> {
             Event selectedEvent = event.getRowValue();
-            selectedEvent.setPrecioEntrada(event.getNewValue());
             Event evento = EventManagerFactory.get().find_XML(Event.class, selectedEvent.getId().toString());
+            evento.setPrecioEntrada(event.getNewValue());
             EventManagerFactory.get().edit_XML(evento, selectedEvent.getId().toString());
+            cargarTabla(recogerAllEvents());
         });
         
         stage.show();
@@ -216,6 +218,5 @@ public class ShowAllEventsViewController {
         LOGGER.info("Bank Statement window initialized.");
 
     }
-
 
 }
