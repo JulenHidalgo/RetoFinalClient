@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -29,6 +30,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -40,6 +43,7 @@ import logic.ClubManagerFactory;
 import logic.EventManager;
 import logic.EventManagerFactory;
 import model.Client;
+import model.Club;
 import model.Event;
 import model.User;
 
@@ -74,7 +78,7 @@ public class ShowAllEventsViewController {
     TableColumn<Event, String> tcNombre;
     
     @FXML
-    TableColumn<Event, Integer> tcSala;
+    TableColumn<Event, String> tcSala;
     
     @FXML
     TableColumn<Event, String> tcFecha;
@@ -123,7 +127,6 @@ public class ShowAllEventsViewController {
     
     
     private void cargarTabla(List<Event> tableEvents){
-        System.out.println(tableEvents.get(0).getPrecioEntrada().toString());
         initializeTableColumns();        
         // Convertir ArrayList a ObservableList
         ObservableList<Event> observableEvents = FXCollections.observableArrayList(tableEvents);       
@@ -140,8 +143,21 @@ public class ShowAllEventsViewController {
         tcNumEntradas.setCellValueFactory(new PropertyValueFactory<>("NumEntradas"));
         tcMusica.setCellValueFactory(new PropertyValueFactory<>("Musica"));
         tcConsumicion.setCellValueFactory(new PropertyValueFactory<>("Consumicion"));
+        
+        //Poner que la columna Sala sea un combobox y cargarle los datos
+        List<String> nombresClubs = recogerAllClubs().stream().map(Club::getNombre).collect(Collectors.toList());
+        ObservableList<String> clubs = FXCollections.observableArrayList(nombresClubs);
+        //tcSala.setCellFactory(ComboBoxTableCell.forTableColumn(FXCollections.observableList(nombresClubs)));
+        tcSala.setCellFactory(ChoiceBoxTableCell.forTableColumn(clubs));
+        
     }
-      
+    
+    private List<Club> recogerAllClubs(){
+        Club[] clubArray = ClubManagerFactory.get().findAll_XML(Club[].class);
+        List<Club> listClubs = Arrays.asList(clubArray);   
+        return listClubs;
+                
+    }
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -154,8 +170,7 @@ public class ShowAllEventsViewController {
         this.tema = tema;
     }
     
-    private List recogerAllEvents(){
-    
+    private List recogerAllEvents(){ 
       Event[] eventsArray = EventManagerFactory.get().findByDate_XML(Event[].class, LocalDate.now().toString());
       List<Event> events = Arrays.asList(eventsArray);
       return  events;
@@ -174,6 +189,7 @@ public class ShowAllEventsViewController {
             btnCrearEvento.setVisible(false);
         }else{
             tablaEvent.setEditable(true);
+            tcMusica.setEditable(false);
         }
         tablaEvent.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Event>() {
             @Override
@@ -199,16 +215,40 @@ public class ShowAllEventsViewController {
                     if(dateFecha.getValue() != null){
                         lbHasta.setVisible(true);
                         dateFechaHasta.setVisible(true);
+                        Event[] eventsArray = EventManagerFactory.get().findByDate_XML(Event[].class, dateFecha.getValue().toString());
+                        List<Event> events = Arrays.asList(eventsArray);
+                        cargarTabla(events);
                     }
                 }
             }
         });
-       
+        dateFecha.setDayCellFactory(picker -> {
+            return new javafx.scene.control.DateCell() {
+                @Override
+                public void updateItem(LocalDate item, boolean empty) {
+                    super.updateItem(item, empty);
+                    // Establecer como no seleccionable cualquier fecha posterior a hoy
+                    setDisable(item.isBefore(LocalDate.now()));
+                }
+            };
+        });
+               
         tcPrecio.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         tcPrecio.setOnEditCommit(event -> {
             Event selectedEvent = event.getRowValue();
+            
             Event evento = EventManagerFactory.get().find_XML(Event.class, selectedEvent.getId().toString());
             evento.setPrecioEntrada(event.getNewValue());
+            EventManagerFactory.get().edit_XML(evento, selectedEvent.getId().toString());
+            cargarTabla(recogerAllEvents());
+        });
+        
+        tcSala.setOnEditCommit(event -> {
+            // Recuperamos el evento (fila) que fue editado
+            Event selectedEvent = event.getRowValue();
+            Event evento = EventManagerFactory.get().find_XML(Event.class, selectedEvent.getId().toString());
+            Club club = recogerAllClubs().stream().filter(c -> c.getNombre().equals(event.getNewValue())).findFirst().orElse(null);
+            evento.setClub(club);
             EventManagerFactory.get().edit_XML(evento, selectedEvent.getId().toString());
             cargarTabla(recogerAllEvents());
         });
