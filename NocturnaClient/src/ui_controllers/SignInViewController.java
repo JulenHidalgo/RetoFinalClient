@@ -5,6 +5,7 @@
  */
 package ui_controllers;
 
+import exceptions.SignInException;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -134,7 +135,7 @@ public class SignInViewController {
             String mail = lanzarAlertTextField("Reseteo de contraseña", "Introduce tu correo electrónico para que te enviemos tu nueva contraseña", "Correo electrónico");
 
             UserManagerFactory.get().resetPassword_XML(User.class, mail);
-            
+
             lanzarAlertCustom(Alert.AlertType.INFORMATION, "Te hemos enviado un correo electronico con tu nueva contraseña.");
         } catch (Exception e) {
             lanzarAlertCustom(Alert.AlertType.ERROR, "No hy ninguna cuenta asociada a ese correo electronico");
@@ -177,6 +178,8 @@ public class SignInViewController {
             controller.setTema(tema);
 
             controller.initStage(root);
+        } catch (SignInException e) {
+            lanzarAlertCustom(Alert.AlertType.ERROR, e.getMessage());
         } catch (IOException e) {
             lanzarAlertCustom(Alert.AlertType.ERROR, "Ha sucedido un error al cargar la ventana, intentalo más tarde");
         }
